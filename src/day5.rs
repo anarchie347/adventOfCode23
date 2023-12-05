@@ -1,5 +1,6 @@
+//Lots of this code is obsolete as it is leftover code from previous attempts at part 2
+
 use core::{num, fmt};
-use std::ops::Deref;
 
 
 pub fn d5(text : Vec<&str>) -> i32 {
