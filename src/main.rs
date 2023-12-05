@@ -1,8 +1,40 @@
+use day5::{NumRange, mapRange};
+
 mod day4;
 mod day3;
+mod day5;
 
 fn main() {
-    run(day4::d4p2, 4);
+    run(day5::newd5p2, 5);
+    //test(day5::d5p2, 5);
+}
+
+fn t(text : Vec<&str>) -> i32 {
+    let mut mappingType = 0;
+    let mut maps : Vec<Vec<Vec<usize>>> = Vec::new();
+    for i in 2..text.len() {
+        let trimmed = text[i].trim();
+        if (trimmed == "") {
+            continue;
+        }
+        if (!trimmed.chars().next().unwrap().is_ascii_digit()) {
+            mappingType += 1;
+            continue;
+        }
+        while (maps.len() <= mappingType) {
+            maps.push(Vec::new())
+        }
+        //println!("E{:?}E", trimmed.split(" ").collect::<Vec<&str>>());
+        maps[mappingType].push(trimmed.split(" ").map(|s| s.parse::<usize>().unwrap()).collect());
+    }
+    maps = maps[1..].to_vec(); //not sure why but ok
+
+    let nr = NumRange{lower: 48, range: 5, offset: 1};
+    let mut nrs : Vec<NumRange> = Vec::new();
+    day5::newMapRange(&maps[0], nr, &mut nrs);
+    println!("{:?}", nrs);
+
+    return 4;
 }
 
 fn run(f : fn(Vec<&str>) -> i32, day : usize) {
@@ -16,12 +48,39 @@ fn run(f : fn(Vec<&str>) -> i32, day : usize) {
 
 fn test(f : fn(Vec<&str>) -> i32, day : usize) {
 
-    let text : &str = "Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53
-    Card 2: 13 32 20 16 61 | 61 30 68 82 17 32 24 19
-    Card 3:  1 21 53 59 44 | 69 82 63 72 16 21 14  1
-    Card 4: 41 92 73 84 69 | 59 84 76 51 58  5 54 83
-    Card 5: 87 83 26 28 32 | 88 30 70 12 93 22 82 36
-    Card 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11";
+    let text : &str = "seeds: 79 14 55 13
+
+    seed-to-soil map:
+    50 98 2
+    52 50 48
+    
+    soil-to-fertilizer map:
+    0 15 37
+    37 52 2
+    39 0 15
+    
+    fertilizer-to-water map:
+    49 53 8
+    0 11 42
+    42 0 7
+    57 7 4
+    
+    water-to-light map:
+    88 18 7
+    18 25 70
+    
+    light-to-temperature map:
+    45 77 23
+    81 45 19
+    68 64 13
+    
+    temperature-to-humidity map:
+    0 69 1
+    1 0 69
+    
+    humidity-to-location map:
+    60 56 37
+    56 93 4";
     let splitText = text.split("\n").map(|s| {s.trim()}).collect();
     let result = f(splitText);
     println!("TestResult: {}", result);
