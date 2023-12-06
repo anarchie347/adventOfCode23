@@ -9,34 +9,6 @@ fn main() {
     //test(day5::d5p2, 5);
 }
 
-fn t(text : Vec<&str>) -> i32 {
-    let mut mappingType = 0;
-    let mut maps : Vec<Vec<Vec<usize>>> = Vec::new();
-    for i in 2..text.len() {
-        let trimmed = text[i].trim();
-        if (trimmed == "") {
-            continue;
-        }
-        if (!trimmed.chars().next().unwrap().is_ascii_digit()) {
-            mappingType += 1;
-            continue;
-        }
-        while (maps.len() <= mappingType) {
-            maps.push(Vec::new())
-        }
-        //println!("E{:?}E", trimmed.split(" ").collect::<Vec<&str>>());
-        maps[mappingType].push(trimmed.split(" ").map(|s| s.parse::<usize>().unwrap()).collect());
-    }
-    maps = maps[1..].to_vec(); //not sure why but ok
-
-    let nr = NumRange{lower: 48, range: 5, offset: 1};
-    let mut nrs : Vec<NumRange> = Vec::new();
-    day5::newMapRange(&maps[0], nr, &mut nrs);
-    println!("{:?}", nrs);
-
-    return 4;
-}
-
 fn run(f : fn(Vec<&str>) -> i32, day : usize) {
     let text = std::fs::read_to_string(format!("src/inputs/{}.txt", day)).expect("couldnt read file");
     let splitText = text.split("\n").map(|s| {s.trim()}).collect();
