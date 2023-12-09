@@ -5,9 +5,11 @@ mod day3;
 mod day5;
 mod day6;
 mod day7;
+mod day8;
+mod day9;
 
 fn main() {
-    run(day7::d7p2, 7);
+    run(day9::d9p2, 9);
     //test(day5::d5p2, 5);
 }
 
@@ -20,13 +22,11 @@ fn run(f : fn(Vec<&str>) -> i32, day : usize) {
     println!("Result: {}", result);
 }
 
-fn test(f : fn(Vec<&str>) -> i32, day : usize) {
+fn test(f : fn(Vec<&str>) -> i32, _day : usize) {
 
-    let text : &str = "32T3K 765
-    T55J5 684
-    KK677 28
-    KTJJT 220
-    QQQJA 483";
+    let text : &str = "0 3 6 9 12 15
+    1 3 6 10 15 21
+    10 13 16 21 30 45";
     let splitText = text.split("\n").map(|s| {s.trim()}).collect();
     let result = f(splitText);
     println!("TestResult: {}", result);
