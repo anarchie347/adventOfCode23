@@ -66,12 +66,14 @@ pub fn d9p2(text : Vec<&str>) -> i32 {
                     )
                 }
             
-            let mut extrapolated = 0;
-            diffferences.iter().rev().for_each(|diff| {
-                extrapolated =  diff[0] - extrapolated; //i am traversing the wrong way through the list to save efficiency, so the order of the subtractions needs to be swapped
-            });
+            // let mut extrapolated = 0;
+            // diffferences.iter().rev().map(|diff| {
+            //     extrapolated =  diff[0] - extrapolated; //i am traversing the wrong way through the list to save efficiency, so the order of the subtractions needs to be swapped
+            // });
+            //extrapolated
+            diffferences.iter().rev().fold(0, |rt, y| y[0] - rt)
             //println!("{}", extrapolated);
-            extrapolated
+            
             // for diffs in diffferences.iter() {
             //     print!("{:?}", diffs)
             // }
