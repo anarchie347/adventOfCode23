@@ -7,9 +7,10 @@ mod day6;
 mod day7;
 mod day8;
 mod day9;
+mod day10;
 
 fn main() {
-    run(day9::d9, 9);
+    run(day10::d10p2, 10);
     //test(day5::d5p2, 5);
 }
 
@@ -24,16 +25,16 @@ fn run(f : fn(Vec<&str>) -> i32, day : usize) {
 
 fn test(f : fn(Vec<&str>) -> i32, _day : usize) {
 
-    let text : &str = "LR
-
-    PPA = (PPB, XXX)
-    PPB = (XXX, PPZ)
-    PPZ = (PPB, XXX)
-    QQA = (QQB, XXX)
-    QQB = (QQC, QQC)
-    QQC = (QQZ, QQZ)
-    QQZ = (QQB, QQB)
-    XXX = (XXX, XXX)";
+    let text : &str = "FF7FSF7F7F7F7F7F---7
+    L|LJ||||||||||||F--J
+    FL-7LJLJ||||||LJL-77
+    F--JF--7||LJLJ7F7FJ-
+    L---JF-JLJ.||-FJLJJ7
+    |F|F-JF---7F7-L7L|7|
+    |FFJF7L7F-JF7|JL---7
+    7-L-JL7||F7|L7F-7F7|
+    L.L7LFJ|||||FJL7||LJ
+    L7JLJL-JLJLJL--JLJ.L";
     let splitText = text.split("\n").map(|s| {s.trim()}).collect();
     let result = f(splitText);
     println!("TestResult: {}", result);
