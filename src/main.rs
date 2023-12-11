@@ -1,3 +1,6 @@
+#![allow(non_snake_case)]
+#![allow(unused_parens)]
+#![allow(dead_code)]
 use day5::{NumRange, mapRange};
 
 mod day4;
@@ -8,13 +11,14 @@ mod day7;
 mod day8;
 mod day9;
 mod day10;
+mod day11;
 
 fn main() {
-    run(day10::d10p2, 10);
+    run(day11::d11p2, 11);
     //test(day5::d5p2, 5);
 }
 
-fn run(f : fn(Vec<&str>) -> i32, day : usize) {
+fn run(f : fn(Vec<&str>) -> i64, day : usize) {
     let text = std::fs::read_to_string(format!("src/inputs/{}.txt", day)).expect("couldnt read file");
     let splitText = text.split("\n").map(|s| {s.trim()}).collect();
     let instant = std::time::Instant::now();
@@ -25,16 +29,16 @@ fn run(f : fn(Vec<&str>) -> i32, day : usize) {
 
 fn test(f : fn(Vec<&str>) -> i32, _day : usize) {
 
-    let text : &str = "FF7FSF7F7F7F7F7F---7
-    L|LJ||||||||||||F--J
-    FL-7LJLJ||||||LJL-77
-    F--JF--7||LJLJ7F7FJ-
-    L---JF-JLJ.||-FJLJJ7
-    |F|F-JF---7F7-L7L|7|
-    |FFJF7L7F-JF7|JL---7
-    7-L-JL7||F7|L7F-7F7|
-    L.L7LFJ|||||FJL7||LJ
-    L7JLJL-JLJLJL--JLJ.L";
+    let text : &str = "...#......
+    .......#..
+    #.........
+    ..........
+    ......#...
+    .#........
+    .........#
+    ..........
+    .......#..
+    #...#.....";
     let splitText = text.split("\n").map(|s| {s.trim()}).collect();
     let result = f(splitText);
     println!("TestResult: {}", result);
