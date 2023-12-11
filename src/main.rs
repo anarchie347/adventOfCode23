@@ -14,11 +14,15 @@ mod day10;
 mod day11;
 
 fn main() {
-    run(day11::d11p2, 11);
+    run(day11::d11, 11);
     //test(day5::d5p2, 5);
 }
 
-fn run(f : fn(Vec<&str>) -> i64, day : usize) {
+fn run<F,T>(f :  F, day : usize)
+where
+    F: Fn(Vec<&str>) -> T,
+    T : std::fmt::Display
+{
     let text = std::fs::read_to_string(format!("src/inputs/{}.txt", day)).expect("couldnt read file");
     let splitText = text.split("\n").map(|s| {s.trim()}).collect();
     let instant = std::time::Instant::now();
@@ -27,7 +31,11 @@ fn run(f : fn(Vec<&str>) -> i64, day : usize) {
     println!("Result: {}", result);
 }
 
-fn test(f : fn(Vec<&str>) -> i32, _day : usize) {
+fn test<F,T>(f :  F, _day : usize)
+where
+    F: Fn(Vec<&str>) -> T,
+    T : std::fmt::Display
+{
 
     let text : &str = "...#......
     .......#..
@@ -44,7 +52,11 @@ fn test(f : fn(Vec<&str>) -> i32, _day : usize) {
     println!("TestResult: {}", result);
 }
 
-fn bench(f : fn(Vec<&str>) -> i32, day : usize) {
+fn bench<F,T>(f :  F, day : usize)
+where
+    F: Fn(Vec<&str>) -> T,
+    T : std::fmt::Display
+{
     let text = std::fs::read_to_string(format!("src/inputs/{}.txt", day)).expect("couldnt read file");
     let splitText : Vec<&str> = text.split("\n").map(|s| {s.trim()}).collect();
     const repetitions : u32= 1000;
